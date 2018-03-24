@@ -1,0 +1,11 @@
+﻿@model TaskDo.Models.Tasks
+
+@using (Html.BeginForm("EditTask", "Home", FormMethod.Post))
+{
+    @Html.HiddenFor(m=>m.Id);
+    @Html.LabelFor(m => m.TaskName);
+    @Html.EditorFor(m => m.TaskName);
+    @Html.LabelFor(m => m.TaskDescription);
+    @Html.EditorFor(m => m.TaskDescription);
+    <input type="submit" value="Submit change" />
+}

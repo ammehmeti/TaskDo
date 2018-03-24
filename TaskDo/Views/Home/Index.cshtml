@@ -1,0 +1,37 @@
+﻿@model List<TaskDo.Models.Tasks>
+
+
+<table>
+<tr>
+    <th>Task Name</th>
+    <th>Task Description</th>
+    <th>Task Date</th>
+</tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.TaskName</td>
+            <td>@item.TaskDescription</td>
+            <td>@item.TaskDate</td>
+            <td><a href="/Home/EditTask?taskId=@item.Id">Edit task</a></td>
+            <td><a href="/Home/DeleteTask?taskId=@item.Id">Delete task</a></td>
+            <td><a href="/Home/SubTasks?taskId=@item.Id">View SubTasks</a></td>
+        </tr>
+    }
+</table>
+
+<div id="addTask">
+    <button id="addtasks" onclick="callAddTask();">Add task</button>
+</div>
+<div id="showAddTask" style="display:none;">
+    @Html.Partial("AddTask", new TaskDo.Models.Tasks());
+</div>
+<script>
+    function callAddTask()
+    {
+       document.getElementById('showAddTask').style.display = 'block';
+    }
+</script>
+
+
+

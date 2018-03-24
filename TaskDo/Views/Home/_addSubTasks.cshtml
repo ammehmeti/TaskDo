@@ -1,0 +1,12 @@
+﻿@model TaskDo.Models.SubTasks
+
+@using (Html.BeginForm("AddSubTasks", "Home", FormMethod.Post))
+{
+    @Html.HiddenFor(m=>m.TaskId);
+    @Html.HiddenFor(m => m.Id);
+    @Html.LabelFor(m => m.SubTaskName);
+    @Html.EditorFor(m => m.SubTaskName);
+    @Html.LabelFor(m => m.SubTaskDescription);
+    @Html.EditorFor(m => m.SubTaskDescription);
+    <input type="submit" value="Submit" />
+}

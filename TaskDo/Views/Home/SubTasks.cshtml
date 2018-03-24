@@ -1,0 +1,34 @@
+﻿@model  List<TaskDo.Models.SubTasks>
+
+@{ 
+    var TaskName = ViewBag.TaskName;
+ }
+
+<h2>@TaskName</h2>
+<table>
+    <tr>
+        <th>SubTask Name</th>
+        <th>SubTask Description</th>
+        <th>SubTask Date</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.SubTaskName</td>
+            <td>@item.SubTaskDescription</td>
+            <td>@item.SubTaskDate</td>
+            <td><a href="/Home/DeleteSubTask?subtaskId=@item.Id&taskId=@item.TaskId">Delete subtask</a></td>
+        </tr>
+    }
+</table>
+<button id="showSubTask" onclick="callAddSubTask();">Add SubTask</button>
+<div id="addSubTask" style="display:none;">
+    @Html.Partial("_addSubTasks", new TaskDo.Models.SubTasks())
+</div>
+<script>
+    function callAddSubTask()
+    {
+
+        document.getElementById('addSubTask').style.display = 'block';
+    }
+</script>
