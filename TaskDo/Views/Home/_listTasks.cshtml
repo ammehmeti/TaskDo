@@ -1,0 +1,17 @@
+﻿@model List<TaskDo.Models.Tasks>
+
+<table>
+    <tr>
+        <th>Task Name</th>
+        <th>Task Description</th>
+        <th>Task Date</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.TaskName</td>
+            <td>@item.TaskDescription</td>
+            <td>@item.TaskDate</td>
+        </tr>
+    }
+</table>

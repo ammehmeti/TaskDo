@@ -31,16 +31,12 @@ namespace TaskDo.Controllers
         [HttpPost]
         public ActionResult AddTask(Tasks task)
         {
-
             TasksHelper.TaskHelper.AddTask(task);
-
-            return RedirectToAction("Index");
+             return RedirectToAction("Index");
         }
         public ActionResult EditTask(int taskId)
         {
-            Tasks task = TasksHelper.TaskHelper.GetTaskToEdit(taskId);
-             
-            return View("_editTask",task);
+            return View("_editTask", TasksHelper.TaskHelper.GetTaskToEdit(taskId));
         }
         [HttpPost]
         public ActionResult EditTask(Tasks task)
@@ -69,6 +65,45 @@ namespace TaskDo.Controllers
         {
             TasksHelper.TaskHelper.DeleteSubTask(subTaskId);
             return RedirectToAction("SubTasks",new {taskId = taskId });
+        }
+        public ActionResult Lists()
+        {
+            
+            return View(TasksHelper.TaskHelper.getLists());
+        }
+        [HttpPost]
+        public ActionResult GetListTasks(int taskId)
+        {
+
+            return PartialView("_listTasks",TasksHelper.TaskHelper.getListTasks(taskId));
+        }
+        [HttpPost]
+        public ActionResult AddList(Lists list)
+        {
+            TasksHelper.TaskHelper.AddList(list);
+            return RedirectToAction("Lists");
+        }
+        public ActionResult EditList(int listId)
+        {
+            
+            return View("_addList",TasksHelper.TaskHelper.getListtoEdit(listId));
+        }
+        public ActionResult DeleteList(int listId)
+        {
+            TasksHelper.TaskHelper.DeleteList(listId);
+            return RedirectToAction("Lists");
+        }
+        [HttpPost]
+        public ActionResult AssignTask(int taskId,int listId)
+        {
+            TasksHelper.TaskHelper.AssignTask(taskId,listId);
+            return RedirectToAction("Index");
+        }
+        [HttpPost]
+        public ActionResult MarkTask(int taskId,int check)
+        {
+            TasksHelper.TaskHelper.MarkTask(taskId,check);
+            return RedirectToAction("Index");
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace TaskDo.Models
 {
@@ -11,6 +12,8 @@ namespace TaskDo.Models
         public string TaskName { get; set; }
         public string TaskDescription { get; set; }
         public DateTime TaskDate { get; set; }
+        public int ListId { get; set; }
+        public int Completed { get; set; }
 
     }
 }

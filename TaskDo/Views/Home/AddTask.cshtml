@@ -1,6 +1,9 @@
 ﻿@model TaskDo.Models.Tasks
 @{
     ViewBag.Title = "Home Page";
+
+    List<SelectListItem> lists = TaskDo.TasksHelper.TaskHelper.getSelectList();
+
 }
 
 @using (Html.BeginForm("AddTask", "Home", FormMethod.Post))
@@ -9,5 +12,9 @@
     @Html.EditorFor(m => m.TaskName);
     @Html.LabelFor(m => m.TaskDescription);
     @Html.EditorFor(m => m.TaskDescription);
-    <input type="submit" value="Add task" />
+    @Html.LabelFor(m=>m.ListId);
+    @Html.DropDownListFor(m=>m.ListId,lists,"----");
+    <input type="submit" value="Add task" id="postoForm"/>
 }
+
+

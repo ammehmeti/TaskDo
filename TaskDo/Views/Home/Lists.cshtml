@@ -1,0 +1,48 @@
+﻿@model List<TaskDo.Models.Lists>
+
+@{
+    ViewBag.Title = "Lists";
+}
+
+<h2>Lists</h2><button id="addList" onclick="AddList();">Add List</button>
+
+@foreach (var item in Model)
+{
+    <h2>@item.ListName</h2>
+    <button id="viewTasks" onclick="getTasks(@item.Id);">View Tasks</button>
+    <a href="/Home/EditList?listId=@item.Id">Edit List</a>
+    <a href="/Home/DeleteList?listId=@item.Id">Delete List</a>
+    <div id="ListElements_@item.Id.ToString()">
+        
+    </div>
+}
+
+
+<div id="showAddTask" style="display:none;">
+    @Html.Partial("_addList", new TaskDo.Models.Lists());
+</div>
+
+
+
+<script>
+    function getTasks(id)
+    {
+        var taskid = id;
+        $.ajax({
+            url: "/Home/GetListTasks",
+            type:"POST",
+            data: {
+                "taskId": id
+            },
+            success: function(res)
+            {
+                debugger;
+                $("#ListElements_"+taskid).html(res);
+            }
+        });
+    }
+    function AddList()
+    {
+        document.getElementById('showAddTask').style.display = 'block';
+    }
+</script>

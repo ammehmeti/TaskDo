@@ -1,6 +1,8 @@
 ﻿@model List<TaskDo.Models.Tasks>
 
-
+@{
+    List<SelectListItem> lists = TaskDo.TasksHelper.TaskHelper.getSelectList();
+}
 <table>
 <tr>
     <th>Task Name</th>
@@ -16,20 +18,79 @@
             <td><a href="/Home/EditTask?taskId=@item.Id">Edit task</a></td>
             <td><a href="/Home/DeleteTask?taskId=@item.Id">Delete task</a></td>
             <td><a href="/Home/SubTasks?taskId=@item.Id">View SubTasks</a></td>
+            <td>Assign task: <select id="assign_@item.Id.ToString()" onchange="assignTask(@item.Id)">
+                <option>----</option>
+                @foreach (var list in lists)
+                {
+                    <option value="@list.Value">@list.Text</option>
+                }
+                </select></td>
+            <td>
+    Mark Complete\Uncomplete:
+    @if (@item.Completed == 1)
+    {
+        <input type="checkbox" id="mark_@item.Id.ToString()" onchange="markTask(@item.Id);" checked/>
+    }
+    else
+    {
+        <input type="checkbox" id="mark_@item.Id.ToString()" onchange="markTask(@item.Id);"  />
+    }
+    </td>
+    
+            
         </tr>
     }
 </table>
-
+<a href="/Home/Lists"> Show Lists</a>
 <div id="addTask">
     <button id="addtasks" onclick="callAddTask();">Add task</button>
 </div>
 <div id="showAddTask" style="display:none;">
-    @Html.Partial("AddTask", new TaskDo.Models.Tasks());
+    @Html.Partial("AddTask", new TaskDo.Models.Tasks())
 </div>
 <script>
     function callAddTask()
     {
        document.getElementById('showAddTask').style.display = 'block';
+    }
+    function assignTask(taskId)
+    {
+        var selectedValue = parseInt(document.getElementById('assign_' + taskId).options[document.getElementById('assign_' + taskId).selectedIndex].value);
+        
+        $.ajax({
+            url: '/Home/AssignTask',
+            type: 'POST',
+            data: {
+                'taskId': taskId,
+                'listId': selectedValue
+            },
+            success: function (res)
+            {
+                
+            }
+        });
+    }
+
+    function markTask(taskId)
+    {
+        var checkBox = document.getElementById('mark_' + taskId);
+        var check = 0;
+        if(checkBox.checked)
+        {
+            check=1;
+        }
+        $.ajax({
+            url: '/Home/MarkTask',
+            type: 'POST',
+            data: {
+                'taskId': taskId,
+                'check':check
+            },
+            success: function (res)
+            {
+               
+            }
+        });
     }
 </script>
 

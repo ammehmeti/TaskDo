@@ -1,5 +1,7 @@
 ﻿@model TaskDo.Models.Tasks
-
+@{ 
+    List<SelectListItem> lists = TaskDo.TasksHelper.TaskHelper.getSelectList();
+}
 @using (Html.BeginForm("EditTask", "Home", FormMethod.Post))
 {
     @Html.HiddenFor(m=>m.Id);
@@ -7,5 +9,7 @@
     @Html.EditorFor(m => m.TaskName);
     @Html.LabelFor(m => m.TaskDescription);
     @Html.EditorFor(m => m.TaskDescription);
+    @Html.LabelFor(m => m.ListId);
+    @Html.DropDownListFor(m => m.ListId, lists, "----");
     <input type="submit" value="Submit change" />
 }

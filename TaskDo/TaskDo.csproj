@@ -25,7 +25,6 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
-    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -176,6 +175,7 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Lists.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\SubTasks.cs" />
     <Compile Include="Models\Tasks.cs" />
@@ -204,9 +204,7 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config">
-      <SubType>Designer</SubType>
-    </Content>
+    <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -244,6 +242,9 @@
     <Content Include="Views\Home\_editTask.cshtml" />
     <Content Include="Views\Home\SubTasks.cshtml" />
     <Content Include="Views\Home\_addSubTasks.cshtml" />
+    <Content Include="Views\Home\Lists.cshtml" />
+    <Content Include="Views\Home\_listTasks.cshtml" />
+    <Content Include="Views\Home\_addList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

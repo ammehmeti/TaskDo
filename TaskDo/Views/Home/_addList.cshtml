@@ -1,0 +1,10 @@
+﻿@model TaskDo.Models.Lists
+
+@using (Html.BeginForm("AddList", "Home", FormMethod.Post))
+{
+    @Html.LabelFor(m => m.ListName);
+    @Html.EditorFor(m => m.ListName);
+    @Html.LabelFor(m => m.ListDesc);
+    @Html.EditorFor(m => m.ListDesc);
+    <input type="submit" value="Add list" />
+}
